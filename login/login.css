@@ -1,0 +1,324 @@
+/* ==========================================================
+   LOGIN PAGE — BAF SHAHEEN COLLEGE CHATTOGRAM
+   ----------------------------------------------------------
+   Loads AFTER ../homee.css and reuses its design tokens
+   (colours, type, spacing, light/dark themes, header, buttons,
+   focus styles). Only login-specific rules live here.
+========================================================== */
+
+:root,
+:root[data-theme="light"] {
+    --error: #b3261e;
+    --success: #1b7a46;
+}
+
+:root[data-theme="dark"] {
+    --error: #f4a7a1;
+    --success: #7fd6a2;
+}
+
+
+/* ---------- Page layout ---------- */
+
+.login-body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-main {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    padding: var(--space-6) var(--gutter);
+    background: var(--hero-bg);
+}
+
+.header-home {
+    min-height: var(--tap);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-right: var(--space-3);
+    padding: 0 var(--space-3);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    transition: color var(--t-fast) var(--ease);
+}
+
+.header-home:hover {
+    color: var(--link);
+}
+
+@media (max-width: 29.99rem) {
+    .header-home span {
+        display: none;
+    }
+
+    .header-home {
+        margin-right: var(--space-2);
+        padding: 0;
+        width: var(--tap);
+        justify-content: center;
+    }
+}
+
+
+/* ---------- Card ---------- */
+
+.login-card {
+    position: relative;
+    width: 100%;
+    max-width: 28rem;
+    padding: var(--space-6) var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+}
+
+@media (min-width: 36rem) {
+    .login-card {
+        padding: var(--space-7) var(--space-6);
+    }
+}
+
+.login-logo {
+    width: 4.5rem;
+    height: 4.5rem;
+    margin: 0 auto var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    background: var(--logo-bg);
+}
+
+.login-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: none;
+}
+
+.login-logo img.is-missing {
+    display: none;
+}
+
+.login-logo:has(img.is-missing) {
+    display: none;
+}
+
+.login-card h1 {
+    margin-bottom: var(--space-2);
+    font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2rem);
+}
+
+.login-subtitle {
+    margin-bottom: var(--space-6);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+}
+
+
+/* ---------- Form fields ---------- */
+
+.input-group {
+    margin-bottom: var(--space-4);
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: var(--space-2);
+    color: var(--heading);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 3rem;
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    transition:
+        border-color var(--t-base) var(--ease),
+        background-color var(--t-base) var(--ease),
+        box-shadow var(--t-base) var(--ease);
+}
+
+.input-box:hover {
+    border-color: var(--link);
+}
+
+.input-box:focus-within {
+    border-color: var(--focus);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 28%, transparent);
+}
+
+.input-box > i {
+    flex: none;
+    width: 2.75rem;
+    text-align: center;
+    color: var(--link);
+    font-size: 0.95rem;
+}
+
+.input-box input {
+    flex: 1;
+    min-width: 0;
+    height: 3rem;
+    padding-right: var(--space-3);
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text);
+    font-size: var(--fs-base); /* 16px: prevents iOS zoom on focus */
+}
+
+.input-box input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+
+.input-box input:focus-visible {
+    outline: 0;
+}
+
+.password-toggle {
+    flex: none;
+    width: var(--tap);
+    height: 3rem;
+    border: 0;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    transition: color var(--t-fast) var(--ease);
+}
+
+.password-toggle:hover {
+    color: var(--link);
+}
+
+
+/* ---------- Options row ---------- */
+
+.login-options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+    margin: var(--space-2) 0 var(--space-5);
+    font-size: var(--fs-sm);
+}
+
+.remember {
+    min-height: var(--tap);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.remember input {
+    width: 1.125rem;
+    height: 1.125rem;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.login-options a {
+    min-height: var(--tap);
+    display: inline-flex;
+    align-items: center;
+    color: var(--link);
+    font-weight: 600;
+}
+
+.login-options a:hover {
+    text-decoration: underline;
+}
+
+
+/* ---------- Submit ---------- */
+
+.login-btn {
+    width: 100%;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    background: var(--primary);
+    color: var(--on-primary);
+    font-size: var(--fs-base);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+    transition:
+        background-color var(--t-base) var(--ease),
+        box-shadow var(--t-base) var(--ease);
+}
+
+.login-btn:hover {
+    background: var(--primary-hover);
+    box-shadow: var(--shadow-md);
+}
+
+.login-message {
+    min-height: 1.5rem;
+    margin-top: var(--space-3);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+}
+
+.login-message.is-error {
+    color: var(--error);
+}
+
+.login-message.is-info {
+    color: var(--text-muted);
+}
+
+.input-box.is-invalid {
+    border-color: var(--error);
+}
+
+
+/* ---------- Back home ---------- */
+
+.back-home {
+    min-height: var(--tap);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    transition: color var(--t-fast) var(--ease);
+}
+
+.back-home:hover {
+    color: var(--link);
+}
+
+@media (max-width: 21.875rem) {
+    .login-card {
+        padding-inline: var(--space-4);
+    }
+}
